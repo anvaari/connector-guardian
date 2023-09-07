@@ -58,6 +58,7 @@ jobs:
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           body: |
+            Docker hub: https://hub.docker.com/r/anvaari/connector-guardian
             Pull image:
             * `docker pull docker.io/anvaari/connector-guardian:${{ steps.env.outputs.PROJECT_TAG }}`
           draft: false

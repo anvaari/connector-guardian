@@ -8,7 +8,9 @@ Connector's Guardian interact with Kafka Connect cluster using its [rest api](ht
 
 ## Container image
 
-You can pull image from registries:
+You can pull image from Docker hub:
+
+* [https://hub.docker.com/r/anvaari/connector-guardian](https://hub.docker.com/r/anvaari/connector-guardian)
 
 ## Usage
 
@@ -42,4 +44,4 @@ In order to use Docker image you need to set some environment variables:
 
 ## To Do
 
-* [] Make Docker Image usable in non ks8 environments.
+* Make Docker Image usable in non ks8 environments.
