@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: connector-guardian
-        image: <image>
+        image: docker.io/anvaari/connector-guardian:0.1.0
         command: ["/bin/bash"]
         args: ["-c", "while true; do /connector-restart; sleep 300; done"]
         resources:
