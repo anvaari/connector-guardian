@@ -21,10 +21,11 @@ logger.setLevel(log_level)
 base_connect_url = f"{connect_protocol}://{connect_host}:{connect_port}"
 
 
-def get_connectors_status(connector_name:str) -> Union[dict[str,str],None]:
+def get_connectors_status() -> Union[dict[str,dict],None]:
     status_url = base_connect_url + "/connectors?expand=status"
     try:
         res = send_request(status_url,
+                           'get',
                            connect_user,
                            connect_pass)
     except RequestFailedError:
@@ -41,5 +42,36 @@ def get_connectors_status(connector_name:str) -> Union[dict[str,str],None]:
                 'tasks':{i['id']:i['state'] for i in v['status']['tasks']} 
             }
             connectors_status[k] = new_v
-        
+        logger.debug("connector's status:\n"
+                     f"{connectors_status}")
         return connectors_status
+
+def restart_connector(connector_name:str) ->bool:
+    restart_url = base_connect_url + f"/connectors/{connector_name}/restart"
+    try:
+        res = send_request(restart_url,
+                           'post',
+                           connect_user,
+                           connect_pass)
+    except RequestFailedError:
+        logger.error(f"Can't restart [b]{connector_name}[/b]. "
+                     "Check the logs for more info")
+        return False
+    else:
+        return True
+    
+def restart_task(connector_name:str,task_id:int):
+    restart_url = base_connect_url + f"/connectors/{connector_name}/tasks/{task_id}/restart"
+    try:
+        res = send_request(restart_url,
+                           'post',
+                           connect_user,
+                           connect_pass)
+    except RequestFailedError:
+        logger.error(f"Can't restart task [i]{task_id}[/i] "
+                     f"[b]{connector_name}[/b]. "
+                     "Check the logs for more info")
+        return False
+    else:
+        return True
+    
