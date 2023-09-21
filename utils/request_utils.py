@@ -12,9 +12,14 @@ logger = logging.getLogger(__name__)
 logger.setLevel(log_level)
 
 def send_request(url:str,
+                 method:str='get',
                  username:str="",
                  password:str="",
                  retry_count:int=3) -> requests.Response:
+    rest_methods = ['get','put','post','delete','patch']
+    if method.lower() not in rest_methods:
+        raise ValueError("Inappropriate method provided. "
+                         f"It's {method} but should be one of {rest_methods}")
     logger.debug(f"Start sending request to {url}")
     for i in range(retry_count):
         logger.debug(f"Request {i+1} of {retry_count}")
@@ -22,8 +27,9 @@ def send_request(url:str,
             with requests.Session() as session:
                 if username and password:
                     session.auth = (username, password)
-
-                response = session.get(url)
+                
+                request_method = getattr(session,method.lower())
+                response = request_method(url)
 
                 response.raise_for_status()
         except requests.exceptions.RequestException as e:
