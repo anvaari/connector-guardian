@@ -1,4 +1,6 @@
-./github/*
+./github
 ./gitignore
-./deploy/*
+./deploy
 .env*
+./venv
+./.git
