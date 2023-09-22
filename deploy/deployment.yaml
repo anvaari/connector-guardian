@@ -33,7 +33,7 @@ spec:
             value: ''
           - name: KAFKA_CONNECT_PORT
             value: '8083'
-          - name: KAFKA_CONNECT_PROTO
+          - name: KAFKA_CONNECT_PROTOCOL
             value: 'http'
           - name: LOG_LEVEL
             value: 'info'
