@@ -12,7 +12,7 @@ logger = logging.getLogger(__name__)
 logger.setLevel(log_level)
 
 def send_request(url:str,
-                 method:str='get',
+                 method:str,
                  username:str="",
                  password:str="",
                  retry_count:int=3) -> requests.Response:
