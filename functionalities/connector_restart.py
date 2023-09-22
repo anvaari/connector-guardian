@@ -66,3 +66,7 @@ def restart_failed_connectors_and_tasks():
             logger.error(f"Restarting task [i]{task_id}[/i] of "
                         f"[b]{conn}[/b] "
                         "was [red]failed[/red]")
+    if not failed_connectors and not failed_tasks:
+        logger.info("All tasks and connectors are "
+                    "[green]healthy[/green] "
+                    "[yellow]:)[/yellow]")
