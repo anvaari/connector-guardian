@@ -1,5 +1,5 @@
 guard: 
-  image: docker.io/anvaari/connector-guardian:0.1.0
+  image: docker.io/anvaari/connector-guardian:0.2.0
 spec: 
   replicas: 1
 
@@ -20,5 +20,5 @@ containers:
        value: ''
      - name: KAFKA_CONNECT_PORT
        value: '8083'
-     - name: KAFKA_CONNECT_PROTO
+     - name: KAFKA_CONNECT_PROTOCOL
        value: 'http'
