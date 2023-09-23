@@ -8,7 +8,7 @@ Connector's Guardian interact with Kafka Connect cluster using its [rest api](ht
 
 ## Features
 
-* **Auto Connector Restart**: It check status of connectors and tasks and restart if they are failed. **Available from [V0.1.0](https://github.com/anvaari/connector-guardian/releases/tag/0.1.0)
+* **Auto Connector Restart**: It check status of connectors and tasks and restart if they are failed. **Available from [V0.1.0](https://github.com/anvaari/connector-guardian/releases/tag/0.1.0)**
 
 ## Usage
 
