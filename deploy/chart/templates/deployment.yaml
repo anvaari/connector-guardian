@@ -15,8 +15,8 @@ spec:
       containers:
       - name: connector-guardian
         image: {{ .Values.guard.image  }}
-        command: ["/bin/bash"]
-        args: ["-c", "while true; do /connector-restart; sleep 300; done"]
+        command: ["/bin/sh"]
+        args: ["-c", "while true; do python /connector-guardian/connector_guardian.py; sleep 300; done"]
         resources:
 	  {{- toYaml ".Values.containers.resources" | indent 4 }}
         env:
