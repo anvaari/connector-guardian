@@ -1,0 +1,14 @@
+version: '3'
+
+services:
+  connector-guardian:
+    image: docker.io/anvaari/connector-guardian:0.2.0
+    tty: true
+    command: /bin/sh -c "while true; do python /connector-guardian/connector_guardian.py; sleep 300; done"
+    environment:
+      - KAFKA_CONNECT_HOST=localhost
+      - KAFKA_CONNECT_USER=
+      - KAFKA_CONNECT_PASS=
+      - KAFKA_CONNECT_PORT=8083
+      - KAFKA_CONNECT_PROTOCOL=http
+      - LOG_LEVEL=info

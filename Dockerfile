@@ -1,11 +1,11 @@
-ARG ALPINE_VERSION=3.16
+ARG PYTHON_VERSION=3.9
 
-FROM alpine:${ALPINE_VERSION}
+FROM python:${PYTHON_VERSION}-alpine
 
 LABEL maintainer="anvaari@proton.me"
 
-RUN apk update && \ 
-    apk add --update --no-cache \
-        bash curl util-linux jq
+COPY . /connector-guardian
 
-COPY ./connector-restart /connector-restart
+RUN pip install -U pip &&  \
+    pip install -r /connector-guardian/requirements.txt
+

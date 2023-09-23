@@ -1,0 +1,6 @@
+./github
+./gitignore
+./deploy
+.env*
+./venv
+./.git
