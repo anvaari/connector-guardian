@@ -1,0 +1,3 @@
+apiVersion: v2
+name: connector-guardian
+version: 1.0.0

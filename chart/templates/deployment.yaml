@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: connector-guardian
+spec:
+  replicas: {.Values.spec.replicas}
+  selector:
+    matchLabels:
+      app: connector-guardian
+  template:
+    metadata:
+      labels:
+        app: connector-guardian
+    spec:
+      containers:
+      - name: connector-guardian
+        image: {{ .Values.guard.image  }}
+        command: ["/bin/bash"]
+        args: ["-c", "while true; do /connector-restart; sleep 300; done"]
+        resources:
+	  {{- toYaml ".Values.containers.resources" | indent 4 }}
+        env:
+	  {{- toYaml ".Values.containers.env" | indent 4 }}
