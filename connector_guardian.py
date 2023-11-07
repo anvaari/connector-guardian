@@ -2,7 +2,7 @@ import logging
 from dotenv import load_dotenv
 import os
 
-from functionalities.connector_restart import restart_failed_connectors_and_tasks
+from functionalities.connector_restart import ConnectorRestarter
 from utils.rich_utils import MyRichLogHandler
 
 load_dotenv()
@@ -19,4 +19,4 @@ logging.basicConfig(level=log_level,
 
 logging.info("Start [b green]Restarting[/b green] failed connectors")
 
-restart_failed_connectors_and_tasks()
+ConnectorRestarter().restart_failed_connectors_and_tasks()
