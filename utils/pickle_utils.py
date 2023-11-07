@@ -31,6 +31,9 @@ def load_dict_pickle(file_name:str) -> dict:
             python_object = pickle.load(fp)
         except Exception as e:
             logger.error(f"Can't load {file_name} "
-                         f"file as picke.\n{e}",exc_info=True)
+                         f"file as picke, empty dict "
+                         "will be returend.\n{e}",exc_info=True)
+            return dict()
         else:
             logger.debug("picke file loaded successfully")
+            return python_object
