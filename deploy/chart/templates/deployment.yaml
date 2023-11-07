@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: connector-guardian
 spec:
-  replicas: {.Values.spec.replicas}
+  replicas: {{ .Values.gaurdianSpec.replicas }}
   selector:
     matchLabels:
       app: connector-guardian
@@ -14,10 +14,12 @@ spec:
     spec:
       containers:
       - name: connector-guardian
-        image: {{ .Values.guard.image  }}
+        image: {{ .Values.gaurdianSpec.image  }}
         command: ["/bin/sh"]
         args: ["-c", "while true; do python /connector-guardian/connector_guardian.py; sleep 300; done"]
         resources:
-	  {{- toYaml ".Values.containers.resources" | indent 4 }}
-        env:
-	  {{- toYaml ".Values.containers.env" | indent 4 }}
+	  {{- toYaml .Values.gaurdianSpec.resources | nindent 10 }}
+        envFrom:
+        - configMapRef:
+            name: {{ .Values.guardianConfig.env.name }}
+
