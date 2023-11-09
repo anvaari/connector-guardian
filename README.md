@@ -10,6 +10,8 @@ Connector's Guardian interact with Kafka Connect cluster using its [rest api](ht
 
 * **Auto Connector Restart**: It check status of connectors and tasks and restart if they are failed. **Available from [V0.1.0](https://github.com/anvaari/connector-guardian/releases/tag/0.1.0)**
 
+* **Restart Back Off**: The restarts will happen always after an increasing time period. The first restart will happen immediately at first run. If it does not help, the next restart will happen only after `EXPONENTIAL_RATIO ^ 1` run. If even the second restart doesn’t help, the next restart will be done only after another `EXPONENTIAL_RATIO ^ 1` run. And so on. This leaves more time for the root cause of the failure to be resolved. Thanks to this back-off mechanism, even if the network outage takes over these minutes, the auto-restart will help your connectors to recover from it. The last Restart (= `MAX_RESTART`) restart will happen after `EXPONENTIAL_RATIO ^ 1` run from the initial failure. But if the issue is not resolved even after the last restart, the Guardian will stop restarting and it is up to you to solve it manually.
+
 ## Usage
 
 ### Container image
@@ -43,7 +45,7 @@ After deploying, it creates 1 pod which run a `connector_guardian.py` every 5 mi
 
 ### Environment variables
 
-In order to use Docker image you need to set some environment variables:
+In order to use Docker image, [docker-compose](./deploy/docker-compose.yaml) or [helm chart](./deploy/chart/),  you need to set some environment variables:
 
 * `KAFKA_CONNECT_HOST`: Default = `localhost`
   * Host of your kafka connect cluster (without `http` or `https` and any `/` at the end and also port)
@@ -53,6 +55,13 @@ In order to use Docker image you need to set some environment variables:
   * Protocol for kafka connect host. Should be `http` and `https`
 * `KAFKA_CONNECT_USER`: Default = `''`
 * `KAFKA_CONNECT_PASS`: Default = `''`
+* `ENABLE_BACKOFF`: Default = `1`
+  * Whether restart back off mechanism should be enabled of not
+  * You should specify this with `0` or `1` every other value considered as `1`
+* `MAX_RESTART` : Default = `7`
+  * Maximum number of continuous restart for each connector
+* `EXPONENTIAL_RATIO`: Default = `1`
+  * Exponential ratio to increase sleep between each connector restart.
 
 **Note:** Set values for `KAFKA_CONNECT_USER` and `KAFKA_CONNECT_PASS` only if Kafka Connect cluster need basic authentication otherwise don't set them.
 
@@ -68,3 +77,9 @@ First version of connector guardian which use simple bash script which restart f
 * Add helm chart thanks to [Amin](https://github.com/alashti)
 * Add `docker-compose.yaml` so connector guardian can be used for non-cloud environment
 * `KAFKA_CONNECT_PROTO` changed to `KAFKA_CONNECT_PROTOCOL`
+
+### [0.3.0](https://github.com/anvaari/connector-guardian/releases/tag/0.3.0)
+
+* Add restart back off mechanism. Read more [here](#features)
+* Some enhancement on helm chart
+* Solve [#11](https://github.com/anvaari/connector-guardian/issues/11) and [#12](https://github.com/anvaari/connector-guardian/issues/12)
