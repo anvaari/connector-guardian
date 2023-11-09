@@ -55,8 +55,11 @@ In order to use Docker image, [docker-compose](./deploy/docker-compose.yaml) or 
   * Protocol for kafka connect host. Should be `http` and `https`
 * `KAFKA_CONNECT_USER`: Default = `''`
 * `KAFKA_CONNECT_PASS`: Default = `''`
+* `ENABLE_BACKOFF`: Default = `1`
+  * Whether restart back off mechanism should be enabled of not
+  * You should specify this with `0` or `1` every other value considered as `1`
 * `MAX_RESTART` : Default = `7`
-  * Maximum number of continuouse restart for each connector
+  * Maximum number of continuous restart for each connector
 * `EXPONENTIAL_RATIO`: Default = `1`
   * Exponential ratio to increase sleep between each connector restart.
 
@@ -76,5 +79,7 @@ First version of connector guardian which use simple bash script which restart f
 * `KAFKA_CONNECT_PROTO` changed to `KAFKA_CONNECT_PROTOCOL`
 
 ### [0.3.0](https://github.com/anvaari/connector-guardian/releases/tag/0.3.0)
+
 * Add restart back off mechanism. Read more [here](#features)
 * Some enhancement on helm chart
+* Solve [#11](https://github.com/anvaari/connector-guardian/issues/11) and [#12](https://github.com/anvaari/connector-guardian/issues/12)
