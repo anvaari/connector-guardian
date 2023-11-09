@@ -51,6 +51,8 @@ class ConnectorRestarter():
     def should_connector_restart(self,
                                  reset:int,
                                  seen:int) -> bool:
+        if not BackOffConfs.is_enabled :
+            return True
         if reset == BackOffConfs.max_restart:
             return False
         elif seen == 0 or log(seen,BackOffConfs.exponential_ratio).is_integer():
@@ -77,7 +79,8 @@ class ConnectorRestarter():
                          "was [red]failed[/red]")
 
         self.guardian_memory_connector[connector] = [reset + 1, seen + 1]
-        save_as_pickle(self.guardian_memory_connector, "guardian_memory_connector.pickle")
+        if BackOffConfs.is_enabled:
+            save_as_pickle(self.guardian_memory_connector, "guardian_memory_connector.pickle")
 
     def restart_task(self, connector:str, task_id:int) -> None:
         reset, seen = self.guardian_memory_task.get(connector,{}).get(task_id,[0,0])
@@ -104,7 +107,8 @@ class ConnectorRestarter():
         self.guardian_memory_task.update(
             {connector:{task_id:[reset + 1, seen + 1]}}
         )
-        save_as_pickle(self.guardian_memory_task, "guardian_memory_task.pickle")
+        if BackOffConfs.is_enabled:
+            save_as_pickle(self.guardian_memory_task, "guardian_memory_task.pickle")
 
     def restart_failed_connectors_and_tasks(self) -> None:
         connectors_status = get_connectors_status()
