@@ -1,5 +1,5 @@
 gaurdianSpec:
-  image: docker.io/anvaari/connector-guardian:0.2.0
+  image: docker.io/anvaari/connector-guardian:0.3.0
   replicas: 1
   resources:
     limits:

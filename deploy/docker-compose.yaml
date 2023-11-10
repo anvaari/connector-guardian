@@ -2,7 +2,7 @@ version: '3'
 
 services:
   connector-guardian:
-    image: docker.io/anvaari/connector-guardian:0.2.0
+    image: docker.io/anvaari/connector-guardian:0.3.0
     tty: true
     command: /bin/sh -c "while true; do python /connector-guardian/connector_guardian.py; sleep 300; done"
     environment:
