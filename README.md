@@ -10,7 +10,7 @@ Connector's Guardian interact with Kafka Connect cluster using its [rest api](ht
 
 * **Auto Connector Restart**: It check status of connectors and tasks and restart if they are failed. **Available from [V0.1.0](https://github.com/anvaari/connector-guardian/releases/tag/0.1.0)**
 
-* **Restart Back Off**: The restarts will happen always after an increasing time period. The first restart will happen immediately at first run. If it does not help, the next restart will happen only after `EXPONENTIAL_RATIO ^ 1` run. If even the second restart doesn’t help, the next restart will be done only after another `EXPONENTIAL_RATIO ^ 1` run. And so on. This leaves more time for the root cause of the failure to be resolved. Thanks to this back-off mechanism, even if the network outage takes over these minutes, the auto-restart will help your connectors to recover from it. The last Restart (= `MAX_RESTART`) restart will happen after `EXPONENTIAL_RATIO ^ 1` run from the initial failure. But if the issue is not resolved even after the last restart, the Guardian will stop restarting and it is up to you to solve it manually.
+* **Restart Back Off**: The restarts will happen always after an increasing time period. The first restart will happen immediately at first run. If it does not help, the next restart will happen only after `EXPONENTIAL_RATIO ^ 1` run. If even the second restart doesn’t help, the next restart will be done only after another `EXPONENTIAL_RATIO ^ 1` run. And so on. This leaves more time for the root cause of the failure to be resolved. Thanks to this back-off mechanism, even if the network outage takes over these minutes, the auto-restart will help your connectors to recover from it. The last Restart (= `MAX_RESTART`) restart will happen after `EXPONENTIAL_RATIO ^ 1` run from the initial failure. But if the issue is not resolved even after the last restart, the Guardian will stop restarting and it is up to you to solve it manually. **Available from [V0.3.0](https://github.com/anvaari/connector-guardian/releases/tag/0.3.0)**
 
 ## Usage
 
@@ -69,19 +69,4 @@ In order to use Docker image, [docker-compose](./deploy/docker-compose.yaml) or 
 
 ## Change Log
 
-### [0.1.0](https://github.com/anvaari/connector-guardian/releases/tag/0.1.0)
-  
-First version of connector guardian which use simple bash script which restart failed connector and task in each run
-
-### [0.2.0](https://github.com/anvaari/connector-guardian/releases/tag/0.2.0)
-
-* Migrate to python
-* Add helm chart thanks to [Amin](https://github.com/alashti)
-* Add `docker-compose.yaml` so connector guardian can be used for non-cloud environment
-* `KAFKA_CONNECT_PROTO` changed to `KAFKA_CONNECT_PROTOCOL`
-
-### [0.3.0](https://github.com/anvaari/connector-guardian/releases/tag/0.3.0)
-
-* Add restart back off mechanism. Read more [here](#features)
-* Some enhancement on helm chart
-* Solve [#11](https://github.com/anvaari/connector-guardian/issues/11) and [#12](https://github.com/anvaari/connector-guardian/issues/12)
+See [CHANGELOG.md](./CHANGELOG.md)
