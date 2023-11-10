@@ -60,8 +60,10 @@ In order to use Docker image, [docker-compose](./deploy/docker-compose.yaml) or 
   * You should specify this with `0` or `1` every other value considered as `1`
 * `MAX_RESTART` : Default = `7`
   * Maximum number of continuous restart for each connector
-* `EXPONENTIAL_RATIO`: Default = `1`
+  * Must be integer greater than 0
+* `EXPONENTIAL_RATIO`: Default = `2`
   * Exponential ratio to increase sleep between each connector restart.
+  * Must be integer greater than 0
 
 **Note:** Set values for `KAFKA_CONNECT_USER` and `KAFKA_CONNECT_PASS` only if Kafka Connect cluster need basic authentication otherwise don't set them.
 
