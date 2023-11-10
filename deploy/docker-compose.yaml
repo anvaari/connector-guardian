@@ -14,4 +14,4 @@ services:
       - LOG_LEVEL=info
       - ENABLE_BACKOFF=1
       - MAX_RESTART=7
-      - EXPONENTIAL_RATIO=1
+      - EXPONENTIAL_RATIO=2
