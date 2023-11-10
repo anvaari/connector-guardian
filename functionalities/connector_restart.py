@@ -55,7 +55,11 @@ class ConnectorRestarter():
             return True
         if reset == BackOffConfs.max_restart:
             return False
-        elif seen == 0 or log(seen,BackOffConfs.exponential_ratio).is_integer():
+        if seen == 0:
+            return True
+        elif BackOffConfs.exponential_ratio == 1:
+            return True
+        elif log(seen,BackOffConfs.exponential_ratio).is_integer():
             return True
         else:
             return False
