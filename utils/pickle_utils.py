@@ -15,7 +15,7 @@ logger = logging.getLogger(__name__)
 logger.setLevel(log_level)
 
 def save_as_pickle(python_object:Union[list,dict,tuple],file_name:str) -> None:
-    with open(os.path.join(project_path,file_name),'wb') as fp:
+    with open(os.path.join(project_path,file_name),'rb') as fp:
         try:
             pickle.dump(python_object,fp)
         except Exception as e:
