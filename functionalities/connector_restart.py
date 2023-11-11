@@ -39,8 +39,8 @@ class ConnectorRestarter():
                                                           if conn in failed_connectors}
 
     def remove_healthy_from_guardian_memory_task(self, failed_tasks: list[tuple[str,int]]):
-        for conn in self.guardian_memory_task:
-            for task_id in self.guardian_memory_task[conn].keys():
+        for conn in list(self.guardian_memory_task.keys()):
+            for task_id in list(self.guardian_memory_task[conn].keys()):
                 if (conn,task_id) not in failed_tasks:
                     self.guardian_memory_task[conn].pop(task_id)
                     
