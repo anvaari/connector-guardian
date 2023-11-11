@@ -27,7 +27,7 @@ def save_as_pickle(python_object:Union[list,dict,tuple],file_name:str) -> None:
 def load_dict_pickle(file_name:str) -> dict:
     if not os.path.isfile(os.path.join(project_path,file_name)):
         return dict()
-    with open(os.path.join(project_path,file_name),'wb') as fp:
+    with open(os.path.join(project_path,file_name),'rb') as fp:
         try:
             python_object = pickle.load(fp)
         except Exception as e:
