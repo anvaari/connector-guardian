@@ -1,22 +1,19 @@
-import requests
-import logging
 from dotenv import load_dotenv
 import os 
 from typing import Union
 from utils.request_utils import send_request
 from exceptions.custom_exceptions import RequestFailedError
+from utils.logging_utils import setup_logger
 
 load_dotenv()
 
-log_level = os.getenv('LOG_LEVEL','info').upper()
 connect_host = os.getenv("KAFKA_CONNECT_HOST","localhost")
 connect_protocol = os.getenv("KAFKA_CONNECT_PROTOCOL",'http')
 connect_port = os.getenv("KAFKA_CONNECT_PORT","8083")
 connect_user = os.getenv("KAFKA_CONNECT_USER","")
 connect_pass = os.getenv("KAFKA_CONNECT_PASS","")
 
-logger = logging.getLogger(__name__)
-logger.setLevel(log_level)
+logger = setup_logger(__name__)
 
 base_connect_url = f"{connect_protocol}://{connect_host}:{connect_port}"
 

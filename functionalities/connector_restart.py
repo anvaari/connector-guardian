@@ -1,7 +1,6 @@
-import logging
-import os
 from dotenv import load_dotenv
 from math import log
+from utils.logging_utils import setup_logger
 from utils.pickle_utils import save_as_pickle,load_dict_pickle
 from utils.kafka_connect_utils import (get_connectors_status,
                                        restart_connector,
@@ -10,10 +9,7 @@ from configs.configs import BackOffConfs
 
 load_dotenv()
 
-log_level = os.getenv("LOG_LEVEL","info").upper()
-
-logger = logging.getLogger(__name__)
-logger.setLevel(log_level)
+logger = setup_logger(__name__)
 
 class ConnectorRestarter():
     

@@ -1,14 +1,14 @@
 import logging
 from dotenv import load_dotenv
-import os
 
 from functionalities.connector_restart import ConnectorRestarter
+from utils.logging_utils import get_validated_log_level
 from utils.rich_utils import MyRichLogHandler
 from configs.config_validator import validate_backoff_configs
 
 load_dotenv()
 
-log_level = os.getenv("LOG_LEVEL",'info').upper()
+log_level = get_validated_log_level()
 
 base_log_format = ("%(asctime)s - %(levelname)s "
                    "in %(filename)s: "

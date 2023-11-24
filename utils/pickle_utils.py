@@ -1,9 +1,9 @@
 import pickle 
 import os 
 import pathlib
-import logging
 from typing import Union
 from dotenv import load_dotenv
+from utils.logging_utils import setup_logger
 
 load_dotenv()
 
@@ -11,8 +11,7 @@ log_level = os.getenv('LOG_LEVEL','info').upper()
 script_path=os.path.dirname(os.path.abspath(__file__))
 project_path = str(pathlib.Path(script_path).parent.absolute())
 
-logger = logging.getLogger(__name__)
-logger.setLevel(log_level)
+logger = setup_logger(__name__)
 
 def save_as_pickle(python_object:Union[list,dict,tuple],file_name:str) -> None:
     with open(os.path.join(project_path,file_name),'wb') as fp:

@@ -1,15 +1,13 @@
 import requests
-import logging
 from dotenv import load_dotenv
 import os 
 from exceptions.custom_exceptions import RequestFailedError
+from utils.logging_utils import setup_logger
+
 
 load_dotenv()
 
-log_level = os.getenv("LOG_LEVEL",'info').upper()
-
-logger = logging.getLogger(__name__)
-logger.setLevel(log_level)
+logger = setup_logger(__name__)
 
 def send_request(url:str,
                  method:str,
