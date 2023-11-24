@@ -28,9 +28,9 @@ def get_connectors_status() -> Union[dict[str,dict],None]:
                            'get',
                            connect_user,
                            connect_pass)
-    except RequestFailedError:
+    except RequestFailedError as rfe:
         logger.error("Can't get status for connectors. "
-                     "Check the logs for more info")
+                     f"Exception:\n{rfe}")
         return None
     else:
         full_status = res.json()
