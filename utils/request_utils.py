@@ -5,7 +5,7 @@ from exceptions.custom_exceptions import RequestFailedError
 from utils.logging_utils import setup_logger
 
 
-load_dotenv()
+load_dotenv("../.env")
 
 logger = setup_logger(__name__)
 

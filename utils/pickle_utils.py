@@ -5,7 +5,7 @@ from typing import Union
 from dotenv import load_dotenv
 from utils.logging_utils import setup_logger
 
-load_dotenv()
+load_dotenv("../.env")
 
 log_level = os.getenv('LOG_LEVEL','info').upper()
 script_path=os.path.dirname(os.path.abspath(__file__))

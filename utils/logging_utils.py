@@ -2,7 +2,7 @@ import logging
 import os
 from dotenv import load_dotenv
 
-load_dotenv()
+load_dotenv("../.env")
 
 def get_validated_log_level(default_level='INFO'):
     valid_log_levels = ['DEBUG', 'INFO', 'WARNING', 'ERROR', 'CRITICAL']

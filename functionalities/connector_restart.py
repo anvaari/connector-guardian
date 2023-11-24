@@ -7,7 +7,7 @@ from utils.kafka_connect_utils import (get_connectors_status,
                                        restart_task)
 from configs.configs import BackOffConfs
 
-load_dotenv()
+load_dotenv("../.env")
 
 logger = setup_logger(__name__)
 

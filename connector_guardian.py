@@ -6,7 +6,7 @@ from utils.logging_utils import get_validated_log_level
 from utils.rich_utils import MyRichLogHandler
 from configs.config_validator import validate_backoff_configs
 
-load_dotenv()
+load_dotenv(".env")
 
 log_level = get_validated_log_level()
 

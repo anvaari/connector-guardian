@@ -5,7 +5,7 @@ from utils.request_utils import send_request
 from exceptions.custom_exceptions import RequestFailedError
 from utils.logging_utils import setup_logger
 
-load_dotenv()
+load_dotenv("../.env")
 
 connect_host = os.getenv("KAFKA_CONNECT_HOST","localhost")
 connect_protocol = os.getenv("KAFKA_CONNECT_PROTOCOL",'http')
