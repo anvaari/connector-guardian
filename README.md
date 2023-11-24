@@ -4,7 +4,7 @@ Guardian you need for your Kafka Connect connectors.
 
 ## How It work
 
-Connector's Guardian interact with Kafka Connect cluster using its [rest api](https://docs.confluent.io/platform/current/connect/references/restapi.html) and parse returned json with [jq](https://github.com/jqlang/jq) (in version [0.1.0](https://github.com/anvaari/connector-guardian/releases/tag/0.1.0)) and with json library in python (from version[0.2.0](https://github.com/anvaari/connector-guardian/releases/tag/0.2.0)).
+Connector's Guardian interact with Kafka Connect cluster using its [rest api](https://docs.confluent.io/platform/current/connect/references/restapi.html) and parse returned json with json library in python.
 
 ## Features
 
@@ -51,7 +51,7 @@ In order to use Docker image, [docker-compose](./deploy/docker-compose.yaml) or 
   * Host of your kafka connect cluster (without `http` or `https` and any `/` at the end and also port)
 * `KAFKA_CONNECT_PORT`: Default = `8083`
   * Port of kafka connect cluster for rest api
-* `KAFKA_CONNECT_PROTO`: Default = `http`
+* `KAFKA_CONNECT_PROTOCOL`: Default = `http`
   * Protocol for kafka connect host. Should be `http` and `https`
 * `KAFKA_CONNECT_USER`: Default = `''`
 * `KAFKA_CONNECT_PASS`: Default = `''`
